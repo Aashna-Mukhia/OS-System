@@ -14,7 +14,14 @@ Here are the arch specific things you need. If you are on anything else, find th
 ```
 yay -S gcc make bison flex libgmp-static libmpc mpfr texinfo nasm mtools qemu-system-x86 python3 scons # or paru
 ```
-Then you must run `python3 -m pip install -r requirements.txt`
+Then you must run 
+```
+uv venv
+source .venv/bin/activate
+uv pip install -r requirements.txt
+```
+or 
+`python3 -m pip install -r requirements.txt`
 
 Next, modify the configuration in `build_scripts/config.py`. The most important is the `toolchain='../.toolchains'` option which sets where the toolchain will be downloaded and built. The default option is in the directory above where the repo is cloned, in a .toolchains directory, but you will get an error if this directory doesn't exist.
 
