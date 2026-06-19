@@ -1,6 +1,6 @@
 #!/bin/bash
 
-QEMU_ARGS='-debugcon stdio -m 32M -display gtk,zoom-to-fit=on'
+QEMU_ARGS='-debugcon stdio -m 32M -display curses'
 
 if [ "$#" -le 1 ]; then
     echo "Usage: ./run.sh <image_type> <image>"

@@ -76,9 +76,9 @@ void PMM_Initialize(BootParams *bootParams, uint32_t kernelStart,
 		g_FreePages--;
 	}
 
-	log_info(MODULE, "Initialized: %u KB free out of %u KB total",
-			 g_FreePages * (PAGE_SIZE / 1024),
-			 g_TotalPages * (PAGE_SIZE / 1024));
+	//log_info(MODULE, "Initialized: %u KB free out of %u KB total",
+			// g_FreePages * (PAGE_SIZE / 1024),
+			 //g_TotalPages * (PAGE_SIZE / 1024));
 }
 
 void *PMM_AllocPage() {

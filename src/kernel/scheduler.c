@@ -26,7 +26,7 @@ void Scheduler_Initialize() {
 	g_TaskCount = 0;
 	g_CurrentTask = 0;
 	g_TickCount = 0;
-	log_info(MODULE, "Initialized");
+	//log_info(MODULE, "Initialized");
 }
 
 void Scheduler_CreateTask(const char *name, void (*entry)()) {
@@ -71,8 +71,8 @@ void Scheduler_CreateTask(const char *name, void (*entry)()) {
 	task->esp = (uint32_t)sp;
 	task->state = TASK_READY;
 
-	log_info(MODULE, "Created task '%s' entry=0x%x stack=0x%x", task->name,
-			 (uint32_t)entry, task->esp);
+	//log_info(MODULE, "Created task '%s' entry=0x%x stack=0x%x", task->name,
+			 //(uint32_t)entry, task->esp);
 
 	g_TaskCount++;
 }
@@ -135,7 +135,7 @@ void Scheduler_RegisterIdle() {
 	task->name[i] = '\0';
 	g_TaskCount = 1;
 	g_CurrentTask = 0;
-	log_info(MODULE, "Registered idle task");
+	//log_info(MODULE, "Registered idle task");
 }
 
 void Scheduler_Yield() {

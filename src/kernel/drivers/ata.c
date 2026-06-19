@@ -95,7 +95,7 @@ bool ATA_Initialize() {
 	for (int i = 0; i < 256; i++)
 		i686_inw(g_Base + ATA_REG_DATA);
 
-	log_info(MODULE, "ATA drive ready");
+	//log_info(MODULE, "ATA drive ready");
 	return true;
 }
 

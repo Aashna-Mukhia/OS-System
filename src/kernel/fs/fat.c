@@ -270,8 +270,8 @@ bool FAT_Initialize() {
 	for (int i = 0; i < MAX_FILE_HANDLES; i++)
 		g_Data->OpenedFiles[i].Opened = false;
 
-	log_info(MODULE, "FAT32 initialized. Root cluster=%u DataLBA=%u",
-			 rootCluster, g_DataSectionLba);
+	//log_info(MODULE, "FAT32 initialized. Root cluster=%u DataLBA=%u",
+			 //rootCluster, g_DataSectionLba);
 	return true;
 }
 

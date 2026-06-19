@@ -31,15 +31,15 @@ void start(BootParams *bootParams) {
 	if (ATA_Initialize()) {
 		uint8_t buf[512];
 		if (ATA_ReadSectors(0, 1, buf)) {
-			printf("ATA: sector 0 bytes 0-3: %x %x %x %x\n", buf[0], buf[1],
-				   buf[2], buf[3]);
+			//printf("ATA: sector 0 bytes 0-3: %x %x %x %x\n", buf[0], buf[1],
+				   //buf[2], buf[3]);
 			// Should print: eb 58 90 (your stage1 jump instruction)
 		}
 	}
 
 	PMM_Initialize(bootParams, (uint32_t)&__entry_start, (uint32_t)&__end);
 
-	printf("UamiOS v0.1\n");
+	printf("VeritasOS v0.1\n");
 	printf("Memory: %u KB free\n", PMM_GetFreePages() * 4);
 	printf("Type 'help' for available commands.\n");
 

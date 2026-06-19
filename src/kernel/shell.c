@@ -150,44 +150,87 @@ static void build_path(const char *name, char *out, int outSize) {
 // ── commands ───────────────────────────────────────────────────────────────
 static void cmd_help(const char *args) {
 	printf("\n");
-	printf("UamiOS Shell - available commands\n");
-	printf("=================================\n");
+	if (args && sh_strcmp(args, "system") == 0)
+	{
+		printf("\n[ System ]\n");
+		printf("  help            Show command list\n");
+		printf("  about           About VeritasOS\n");
+		printf("  clear           Clear the screen\n");
+		printf("  version         OS version\n");
+		printf("  fastfetch       Display system information\n");
+		printf("  reboot          Restart the system\n");
+		printf("  shutdown        Power off the system\n");
+		return;
+	}
 
-	printf("\n[ System ]\n");
-	printf("  help            Show this message\n");
-	printf("  clear           Clear the screen\n");
-	printf("  version         Show OS version info\n");
-	printf("  fastfetch       Display system information\n");
-	printf("  reboot          Restart the system\n");
-	printf("  shutdown        Power off the system\n");
+	if (args && sh_strcmp(args, "memory") == 0)
+	{
+		printf("\n[ Memory ]\n");
+		printf("  meminfo         Show physical memory usage\n");
+		printf("  pmm_demo        Page allocator demonstration\n");
+		return;
+	}
 
-	printf("\n[ Memory ]\n");
-	printf("  meminfo         Show physical memory usage\n");
-	printf("  pmm_demo        Page allocator demonstration\n");
+	if (args && sh_strcmp(args, "scheduler") == 0)
+	{
+		printf("\n[ Scheduling ]\n");
+		printf("  utop            Show tasks and scheduling stats\n");
+		printf("  sched_demo      Round-robin scheduler demo\n");
+		printf("  thread_demo     Shared counter threading demo\n");
+		printf("  create <name>   Register demo task (future use)\n");
+		printf("  kill <id>       Kill task by ID\n");
+		return;
+	}
 
-	printf("\n[ Scheduling ]\n");
-	printf("  utop            Show tasks and scheduling stats\n");
-	printf("  sched_demo      Round-robin scheduler demo\n");
-	printf("  thread_demo     Shared counter threading demo\n");
-	printf("  create <name>   Register demo task (future use)\n");
-	printf("  kill <id>       Kill task by ID\n");
+	if (args && sh_strcmp (args, "filesystem") == 0)
+	{
+		printf("\n[ Filesystem ]\n");
+		printf("  cd [dir]        Change directory (cd .. to go up)\n");
+		printf("  ls [path]       List directory contents\n");
+		printf("  cat <file>      Display file contents\n");
+		printf("  touch <file>    Create empty file\n");
+		printf("  mkdir <dir>     Create directory\n");
+		printf("  rm <name>       Delete file\n");
+		printf("  rmdir <dir>     Delete directory\n");
+		printf("  df              Show disk/cluster info\n");
+		return;
+	}
 
-	printf("\n[ Filesystem ]\n");
-	printf("  cd [dir]        Change directory (cd .. to go up)\n");
-	printf("  ls [path]       List directory contents\n");
-	printf("  cat <file>      Display file contents\n");
-	printf("  touch <file>    Create empty file\n");
-	printf("  mkdir <dir>     Create directory\n");
-	printf("  rm <name>       Delete file\n");
-	printf("  rmdir <dir>     Delete directory\n");
-	printf("  df              Show disk/cluster info\n");
+	if (args && sh_strcmp (args, "other") == 0)
+	{
+		printf("\n[ Other ]\n");
+		printf("  print <text>    Print text or redirect to file\n");
+		printf("                  Usage: print \"hello\" > file.txt\n");
+		printf("                         print \"hi\" >> file.txt\n");
+		printf("  owl             Display a wise owl\n");
+		return;
+	}
 
-	printf("\n[ Other ]\n");
-	printf("  print <text>    Print text or redirect to file\n");
-	printf("                  Usage: print \"hello\" > file.txt\n");
-	printf("                         print \"hi\" >> file.txt\n");
-	printf("  cow             Display a friendly cow\n");
+	printf("\nVeritasOS Help\n");
+	printf("===========================\n");
+	printf("help system        System commands\n");
+	printf("help memory        Memory commands\n");
+	printf("help scheduler     Scheduling commands\n");
+	printf("help filesystem    File system commands\n");
+	printf("help other         Other commands\n");
+	printf("\n");
+}
 
+static  void cmd_about(const char *args)
+{
+	printf("\n");
+	printf("==============================\n");
+	printf("           VeritasOS\n");
+	printf("==============================\n");
+	printf("\n");
+	printf("Integrity    Intelligence  Innovation\n");
+	printf("\n");
+	printf("Version: VeritasOS v1.0\n");
+	printf("\n");
+	printf("Developed By:\n");
+	printf("  Aashna Mukhia\n");
+	printf("  Suryansh Bikram Shah\n");
+	printf("  Udita Pudasaini\n");
 	printf("\n");
 }
 
@@ -251,7 +294,7 @@ static void cmd_clear(const char *args) {
 
 static void cmd_version(const char *args) {
 	printf("\n");
-	printf("  UamiOS v0.1\n");
+	printf("  VeritasOS v1.0\n");
 	printf("  Architecture : x86 (i686), 32-bit protected mode\n");
 	printf("  Bootloader   : custom 2-stage (FAT32)\n");
 	printf("  Kernel       : monolithic, written in C\n");
@@ -273,18 +316,14 @@ static void cmd_fastfetch(const char *args) {
 		disk_total_kb > 0 ? (disk_used_kb * 100 / disk_total_kb) : 0;
 
 	printf("\n");
-	printf("@@@  @@@   @@@@@@   @@@@@@@@@@   @@@   @@@@@@    @@@@@@\n");
-	printf("@@@  @@@  @@@@@@@@  @@@@@@@@@@@  @@@  @@@@@@@@  @@@@@@@\n");
-	printf("@@!  @@@  @@!  @@@  @@! @@! @@!  @@!  @@!  @@@  !@@\n");
-	printf("!@!  @!@  !@!  @!@  !@! !@! !@!  !@!  !@!  @!@  !@!\n");
-	printf("@!@  !@!  @!@!@!@!  @!! !!@ @!@  !!@  @!@  !@!  !!@@!!\n");
-	printf("!@!  !!!  !!!@!!!!  !@!   ! !@!  !!!  !@!  !!!   !!@!!!\n");
-	printf("!!:  !!!  !!:  !!!  !!:     !!:  !!:  !!:  !!!       !:!\n");
-	printf(":!:  !:!  :!:  !:!  :!:     :!:  :!:  :!:  !:!      !:!\n");
-	printf("::::: ::  ::   :::  :::     ::    ::  ::::: ::  :::: ::\n");
-	printf(" : :  :    :   : :   :      :    :     : :  :   :: : :\n");
+	printf("**************************************************\n");
+	printf("*                                                *\n");
+	printf("*                    VeritasOS                   *\n");
+	printf("*                                                *\n");
+	printf("*                                                *\n");
+	printf("**************************************************\n");
 	printf("\n");
-	printf("  OS       : UamiOS v0.2\n");
+	printf("  OS       : VeritasOS v1.0\n");
 	printf("  Arch     : i686 (32-bit x86)\n");
 	printf("  Mode     : Protected Mode\n");
 	printf("  RAM      : %u KB used / %u KB total\n", used_kb, total_kb);
@@ -292,7 +331,7 @@ static void cmd_fastfetch(const char *args) {
 	printf("  Disk     : %u KB used / %u KB total (%u%%)\n", disk_used_kb,
 		   disk_total_kb, disk_pct);
 	printf("  Free Disk: %u KB\n", disk_free_kb);
-	printf("  Shell    : UamiShell v0.2\n");
+	printf("  Shell    : VeritasShell v1.0\n");
 	printf("  Kernel   : Monolithic C kernel\n");
 	printf("  Boot     : Custom 2-stage FAT32 bootloader\n");
 }
@@ -449,7 +488,7 @@ static void cmd_utop(const char *args) {
 	int count = Scheduler_GetTaskCount();
 
 	printf("\n");
-	printf("  UamiOS Thread Manager (utop)\n");
+	printf("  VeritasOS Thread Manager (utop)\n");
 	printf("  -----------------------------\n");
 	printf("  Threading model: cooperative + preemptive kernel threads\n");
 	printf("  All threads share the same address space (kernel space)\n");
@@ -667,7 +706,7 @@ static volatile int g_UserTaskRunning[MAX_TASKS] = {0};
 static void user_task_fn_0() {
 	int c = 0;
 	while (g_UserTaskRunning[0]) {
-		printf("[T0:%d]", c++);
+		printf("[Shell:%d]", c++);
 		if (g_NeedSchedule) {
 			g_NeedSchedule = 0;
 			Scheduler_Yield();
@@ -683,7 +722,7 @@ static void user_task_fn_0() {
 static void user_task_fn_1() {
 	int c = 0;
 	while (g_UserTaskRunning[1]) {
-		printf("[T1:%d]", c++);
+		printf("[Logger:%d]", c++);
 		if (g_NeedSchedule) {
 			g_NeedSchedule = 0;
 			Scheduler_Yield();
@@ -699,7 +738,7 @@ static void user_task_fn_1() {
 static void user_task_fn_2() {
 	int c = 0;
 	while (g_UserTaskRunning[2]) {
-		printf("[T2:%d]", c++);
+		printf("[Renderer:%d]", c++);
 		if (g_NeedSchedule) {
 			g_NeedSchedule = 0;
 			Scheduler_Yield();
@@ -917,14 +956,14 @@ static void cmd_print(const char *args) {
 	}
 }
 
-static void cmd_cow(const char *args) {
-	// printf("\n");
-	printf("        ^__^\n");
-	printf("        (oo)\\_______\n");
-	printf("        (__)\\       )\\/\\\n");
-	printf("            ||----w |\n");
-	printf("            ||     ||\n");
-	// printf("\n");
+static void cmd_owl(const char *args) {
+	printf("\n");
+	printf("        ,__,\n");
+	printf("        (o,o)\n");
+	printf("        (   )\n");
+	printf("         \"\"\n");
+	printf("\n");
+	printf("Wisdom powers VeritasOS.\n");
 }
 
 static void cmd_reboot(const char *args) {
@@ -1067,7 +1106,7 @@ static const Command g_Commands[] = {
 	{"clear", cmd_clear},
 	{"version", cmd_version},
 	{"fastfetch", cmd_fastfetch},
-
+	{"about", cmd_about},
 	// Memory
 	{"meminfo", cmd_meminfo},
 	{"pmm_demo", cmd_pmm_demo},
@@ -1089,7 +1128,7 @@ static const Command g_Commands[] = {
 
 	// Other
 	{"print", cmd_print},
-	{"cow", cmd_cow},
+	{"owl", cmd_owl},
 	{"reboot", cmd_reboot},
 	{"shutdown", cmd_shutdown},
 	{"cd", cmd_cd},
@@ -1132,7 +1171,7 @@ void Shell_Initialize() {
 	g_LineReady = false;
 }
 
-static void print_prompt() { printf("\nuser@uami:%s> ", g_CWD); }
+static void print_prompt() { printf("\nveritas:> ", g_CWD); }
 
 void Shell_Run() {
 	print_prompt();
@@ -1178,3 +1217,5 @@ void Shell_Run() {
 		}
 	}
 }
+
+

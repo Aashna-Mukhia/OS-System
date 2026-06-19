@@ -12,7 +12,7 @@ ThreadID Thread_Create(const char *name, void (*entry)()) {
 	int after = Scheduler_GetTaskCount();
 	if (after == before)
 		return -1;
-	log_info(MODULE, "Created thread '%s' id=%d", name, after - 1);
+	//log_info(MODULE, "Created thread '%s' id=%d", name, after - 1);
 	return after - 1;
 }
 
