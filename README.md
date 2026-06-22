@@ -1,4 +1,4 @@
-# UamiOS
+# VeritasOS
 
 Made an operating system. I based if off of [NanoByte](https://youtube.com/playlist?list=PLFjM7v6KGMpiH2G-kT781ByCNC_0pKpPN&si=ywS0AYSzldNTsXI4)'s tutorial and from there I added a shell and stuff. I implemented memory management, CPU scheduling, interrupt handling, threading, and a FAT32 filesystem.
 
